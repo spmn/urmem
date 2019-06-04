@@ -47,6 +47,15 @@ public:
 
         return u.addr;
     };
+    
+	static address_t get_rel_call_addr(address_t addr) {
+        byte_t opcode = pointer(addr).field<byte_t>(0);
+        if (opcode != 0xE8 && opcode != 0xE9) {
+            return 0;
+        }
+
+        return pointer(addr).field<address_t>(1) + (addr + 5);
+    };    
 
     static void unprotect_memory(address_t addr, std::size_t length) {
 #ifdef _WIN32
