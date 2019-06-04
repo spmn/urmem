@@ -47,8 +47,8 @@ public:
 
         return u.addr;
     };
-    
-	static address_t get_rel_call_addr(address_t addr) {
+
+    static address_t get_rel_call_addr(address_t addr) {
         byte_t opcode = pointer(addr).field<byte_t>(0);
         if (opcode != 0xE8 && opcode != 0xE9) {
             return 0;
